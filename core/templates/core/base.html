@@ -1,0 +1,39 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLife</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+
+    <header class="cabecalho">
+        <h1>NutriLife</h1>
+        <p>Sistema de Gerenciamento Nutricional</p>
+    </header>
+
+    <div class="container">
+
+        <aside class="menu">
+            <h2>Menu</h2>
+
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'clientes' %}">Clientes</a>
+            <a href="{% url 'avaliacoes' %}">Avaliações</a>
+            <a href="{% url 'dietas' %}">Dietas</a>
+            <a href="{% url 'retornos' %}">Retornos</a>
+            <a href="/admin/">Administração</a>
+        </aside>
+
+        <main class="conteudo">
+            {% block conteudo %}
+            {% endblock %}
+        </main>
+
+    </div>
+
+</body>
+</html>
