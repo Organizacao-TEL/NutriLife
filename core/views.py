@@ -153,3 +153,16 @@ def excluir_dieta(request, id):
         return redirect('dietas')
 
     return render(request, 'core/excluir_dieta.html', {'dieta': dieta})
+def historico_cliente(request, id):
+    cliente = Cliente.objects.get(id=id)
+
+    avaliacoes = cliente.avaliacao_set.all()
+    dietas = cliente.dieta_set.all()
+    retornos = cliente.retorno_set.all()
+
+    return render(request, 'core/historico.html', {
+        'cliente': cliente,
+        'avaliacoes': avaliacoes,
+        'dietas': dietas,
+        'retornos': retornos
+    })
