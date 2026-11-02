@@ -1,6 +1,65 @@
 {% extends 'core/base.html' %}
 
 {% block conteudo %}
-    <h2>Avaliações</h2>
-    <p>Área de avaliações físicas.</p>
+
+<h2>Avaliações Físicas</h2>
+
+<p>Cadastre e consulte as avaliações físicas dos clientes.</p>
+
+<br>
+
+<a href="{% url 'cadastrar_avaliacao' %}">
+    <button type="button">Cadastrar Avaliação</button>
+</a>
+
+<br><br>
+
+<h3>Avaliações cadastradas</h3>
+
+{% if avaliacoes %}
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Cliente</th>
+            <th>Data</th>
+            <th>Peso</th>
+            <th>Altura</th>
+            <th>Cintura</th>
+            <th>Quadril</th>
+            <th>Observações</th>
+            <th>Ações</th>
+        </tr>
+
+        {% for avaliacao in avaliacoes %}
+        <tr>
+            <td>{{ avaliacao.cliente.nome }}</td>
+            <td>{{ avaliacao.data }}</td>
+            <td>{{ avaliacao.peso }}</td>
+            <td>{{ avaliacao.altura }}</td>
+            <td>{{ avaliacao.cintura }}</td>
+            <td>{{ avaliacao.quadril }}</td>
+            <td>{{ avaliacao.observacoes }}</td>
+
+            <td>
+                <a href="{% url 'editar_avaliacao' avaliacao.id %}">
+                    Editar
+                </a>
+
+                |
+
+                <a href="{% url 'excluir_avaliacao' avaliacao.id %}">
+                    Excluir
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+{% else %}
+
+    <p>Nenhuma avaliação cadastrada ainda.</p>
+
+{% endif %}
+
 {% endblock %}
