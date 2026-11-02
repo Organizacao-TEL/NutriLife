@@ -2,9 +2,9 @@
 
 {% block conteudo %}
 
-<h2>Gerenciamento de Clientes</h2>
+<h2>Clientes</h2>
 
-<p>Cadastre e consulte os clientes do NutriLife.</p>
+<p>Cadastre, consulte e gerencie os clientes do NutriLife.</p>
 
 <br>
 
@@ -14,7 +14,7 @@
 
 <br><br>
 
-<h3>Pesquisar Cliente</h3>
+<h3>Clientes cadastrados</h3>
 
 <form method="GET">
     <input
@@ -22,52 +22,46 @@
         name="busca"
         placeholder="Digite o nome do cliente"
     >
-
     <button type="submit">Pesquisar</button>
 </form>
 
 <br>
 
-<h3>Clientes cadastrados</h3>
-
 {% if clientes %}
 
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Peso</th>
-            <th>Altura</th>
-            <th>Contato</th>
-            <th>Ações</th>
-        </tr>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Peso</th>
+        <th>Altura</th>
+        <th>Contato</th>
+        <th>Ações</th>
+    </tr>
 
-        {% for cliente in clientes %}
-        <tr>
-            <td>{{ cliente.nome }}</td>
-            <td>{{ cliente.idade }}</td>
-            <td>{{ cliente.peso }}</td>
-            <td>{{ cliente.altura }}</td>
-            <td>{{ cliente.contato }}</td>
+    {% for cliente in clientes %}
+    <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.idade }}</td>
+        <td>{{ cliente.peso }}</td>
+        <td>{{ cliente.altura }}</td>
+        <td>{{ cliente.contato }}</td>
 
-            <td>
-                <a href="{% url 'editar_cliente' cliente.id %}">
-                    Editar
-                </a>
+        <td>
+            <a href="{% url 'editar_cliente' cliente.id %}">Editar</a>
+            |
+            <a href="{% url 'excluir_cliente' cliente.id %}">Excluir</a>
+            |
+            <a href="{% url 'historico_cliente' cliente.id %}">Histórico</a>
+        </td>
+    </tr>
+    {% endfor %}
 
-                |
-
-                <a href="{% url 'excluir_cliente' cliente.id %}">
-                    Excluir
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+</table>
 
 {% else %}
 
-    <p>Nenhum cliente encontrado.</p>
+<p>Nenhum cliente cadastrado ainda.</p>
 
 {% endif %}
 

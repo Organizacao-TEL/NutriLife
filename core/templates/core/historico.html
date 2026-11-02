@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Histórico do Cliente</h2>
+
+<h3>{{ cliente.nome }}</h3>
+
+<p><strong>Idade:</strong> {{ cliente.idade }} anos</p>
+<p><strong>Peso atual:</strong> {{ cliente.peso }} kg</p>
+<p><strong>Altura:</strong> {{ cliente.altura }} m</p>
+<p><strong>Contato:</strong> {{ cliente.contato }}</p>
+
+<hr>
+
+<h3>Avaliações Físicas</h3>
+
+{% if avaliacoes %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Data</th>
+        <th>Peso</th>
+        <th>Altura</th>
+        <th>Cintura</th>
+        <th>Quadril</th>
+        <th>Observações</th>
+    </tr>
+
+    {% for avaliacao in avaliacoes %}
+    <tr>
+        <td>{{ avaliacao.data }}</td>
+        <td>{{ avaliacao.peso }} kg</td>
+        <td>{{ avaliacao.altura }} m</td>
+        <td>{{ avaliacao.cintura }}</td>
+        <td>{{ avaliacao.quadril }}</td>
+        <td>{{ avaliacao.observacoes }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhuma avaliação física cadastrada.</p>
+{% endif %}
+
+<hr>
+
+<h3>Dietas</h3>
+
+{% if dietas %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Data de cadastro</th>
+    </tr>
+
+    {% for dieta in dietas %}
+    <tr>
+        <td>{{ dieta.nome }}</td>
+        <td>{{ dieta.descricao }}</td>
+        <td>{{ dieta.data_cadastro }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhuma dieta cadastrada.</p>
+{% endif %}
+
+<hr>
+
+<h3>Retornos e Consultas</h3>
+
+{% if retornos %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Data</th>
+        <th>Evolução</th>
+        <th>Ajustes</th>
+        <th>Observações</th>
+    </tr>
+
+    {% for retorno in retornos %}
+    <tr>
+        <td>{{ retorno.data }}</td>
+        <td>{{ retorno.evolucao }}</td>
+        <td>{{ retorno.ajustes }}</td>
+        <td>{{ retorno.observacoes }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum retorno cadastrado.</p>
+{% endif %}
+
+<br>
+
+<a href="{% url 'clientes' %}">Voltar para clientes</a>
+
+{% endblock %}
