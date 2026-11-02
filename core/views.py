@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Cliente
-from .forms import ClienteForm
-
+from django.shortcuts import render, redirect
+from .models import Cliente, Avaliacao
+from .forms import ClienteForm, AvaliacaoForm
 
 def inicio(request):
     return render(request, 'core/inicio.html')
@@ -51,8 +51,11 @@ def editar_cliente(request, id):
     })
 
 def avaliacoes(request):
-    return render(request, 'core/avaliacoes.html')
+    lista_avaliacoes = Avaliacao.objects.all()
 
+    return render(request, 'core/avaliacoes.html', {
+        'avaliacoes': lista_avaliacoes
+    })
 
 def dietas(request):
     return render(request, 'core/dietas.html')
@@ -70,4 +73,45 @@ def excluir_cliente(request, id):
 
     return render(request, 'core/excluir_cliente.html', {
         'cliente': cliente
+    })
+
+def cadastrar_avaliacao(request):
+    if request.method == 'POST':
+        form = AvaliacaoForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('avaliacoes')
+    else:
+        form = AvaliacaoForm()
+
+    return render(request, 'core/form_avaliacao.html', {
+        'form': form
+    })
+
+def editar_avaliacao(request, id):
+    avaliacao = Avaliacao.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = AvaliacaoForm(request.POST, instance=avaliacao)
+
+        if form.is_valid():
+            form.save()
+            return redirect('avaliacoes')
+    else:
+        form = AvaliacaoForm(instance=avaliacao)
+
+    return render(request, 'core/form_avaliacao.html', {
+        'form': form
+    })
+
+def excluir_avaliacao(request, id):
+    avaliacao = Avaliacao.objects.get(id=id)
+
+    if request.method == 'POST':
+        avaliacao.delete()
+        return redirect('avaliacoes')
+
+    return render(request, 'core/excluir_avaliacao.html', {
+        'avaliacao': avaliacao
     })

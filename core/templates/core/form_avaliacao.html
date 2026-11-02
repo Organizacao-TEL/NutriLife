@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Avaliação Física</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Salvar Avaliação</button>
+</form>
+
+<a href="{% url 'avaliacoes' %}">Voltar</a>
+
+{% endblock %}
