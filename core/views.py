@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
-from django.shortcuts import render, redirect
-from .models import Cliente, Avaliacao
-from .forms import ClienteForm, AvaliacaoForm
+from .models import Cliente, Avaliacao, Dieta
+from .forms import ClienteForm, AvaliacaoForm, DietaForm
 
 def inicio(request):
     return render(request, 'core/inicio.html')
@@ -115,3 +114,42 @@ def excluir_avaliacao(request, id):
     return render(request, 'core/excluir_avaliacao.html', {
         'avaliacao': avaliacao
     })
+def dietas(request):
+    lista_dietas = Dieta.objects.all()
+    return render(request, 'core/dietas.html', {'dietas': lista_dietas})
+
+
+def cadastrar_dieta(request):
+    if request.method == 'POST':
+        form = DietaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dietas')
+    else:
+        form = DietaForm()
+
+    return render(request, 'core/form_dieta.html', {'form': form})
+
+
+def editar_dieta(request, id):
+    dieta = Dieta.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = DietaForm(request.POST, instance=dieta)
+        if form.is_valid():
+            form.save()
+            return redirect('dietas')
+    else:
+        form = DietaForm(instance=dieta)
+
+    return render(request, 'core/form_dieta.html', {'form': form})
+
+
+def excluir_dieta(request, id):
+    dieta = Dieta.objects.get(id=id)
+
+    if request.method == 'POST':
+        dieta.delete()
+        return redirect('dietas')
+
+    return render(request, 'core/excluir_dieta.html', {'dieta': dieta})
