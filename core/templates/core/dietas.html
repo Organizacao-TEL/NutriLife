@@ -1,6 +1,52 @@
 {% extends 'core/base.html' %}
 
 {% block conteudo %}
-    <h2>Dietas</h2>
-    <p>Área de gerenciamento de dietas.</p>
+
+<h2>Dietas</h2>
+
+<p>Cadastre e consulte as dietas dos clientes.</p>
+
+<br>
+
+<a href="{% url 'cadastrar_dieta' %}">
+    <button type="button">Cadastrar Dieta</button>
+</a>
+
+<br><br>
+
+<h3>Dietas cadastradas</h3>
+
+{% if dietas %}
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Cliente</th>
+        <th>Nome da Dieta</th>
+        <th>Descrição</th>
+        <th>Data de Cadastro</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for dieta in dietas %}
+    <tr>
+        <td>{{ dieta.cliente.nome }}</td>
+        <td>{{ dieta.nome }}</td>
+        <td>{{ dieta.descricao }}</td>
+        <td>{{ dieta.data_cadastro }}</td>
+        <td>
+            <a href="{% url 'editar_dieta' dieta.id %}">Editar</a>
+            |
+            <a href="{% url 'excluir_dieta' dieta.id %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+
+<p>Nenhuma dieta cadastrada ainda.</p>
+
+{% endif %}
+
 {% endblock %}

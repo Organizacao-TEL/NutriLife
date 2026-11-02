@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Dieta</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Salvar Dieta</button>
+</form>
+
+<a href="{% url 'dietas' %}">Voltar</a>
+
+{% endblock %}
