@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Retorno ou Consulta</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Salvar Retorno</button>
+</form>
+
+<a href="{% url 'retornos' %}">Voltar</a>
+
+{% endblock %}

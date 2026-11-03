@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Avaliacao, Dieta
+from .models import Cliente, Avaliacao, Dieta, Retorno
 
 
 class ClienteForm(forms.ModelForm):
@@ -18,3 +18,9 @@ class DietaForm(forms.ModelForm):
     class Meta:
         model = Dieta
         fields = ['cliente', 'nome', 'descricao']
+
+
+class RetornoForm(forms.ModelForm):
+    class Meta:
+        model = Retorno
+        fields = ['cliente', 'evolucao', 'ajustes', 'observacoes']

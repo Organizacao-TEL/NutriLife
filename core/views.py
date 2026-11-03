@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Cliente, Avaliacao, Dieta
-from .forms import ClienteForm, AvaliacaoForm, DietaForm
+from .models import Cliente, Avaliacao, Dieta, Retorno
+from .forms import ClienteForm, AvaliacaoForm, DietaForm, RetornoForm
 
 def inicio(request):
     return render(request, 'core/inicio.html')
@@ -166,3 +166,42 @@ def historico_cliente(request, id):
         'dietas': dietas,
         'retornos': retornos
     })
+def retornos(request):
+    lista_retornos = Retorno.objects.all()
+    return render(request, 'core/retornos.html', {'retornos': lista_retornos})
+
+
+def cadastrar_retorno(request):
+    if request.method == 'POST':
+        form = RetornoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('retornos')
+    else:
+        form = RetornoForm()
+
+    return render(request, 'core/form_retorno.html', {'form': form})
+
+
+def editar_retorno(request, id):
+    retorno = Retorno.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = RetornoForm(request.POST, instance=retorno)
+        if form.is_valid():
+            form.save()
+            return redirect('retornos')
+    else:
+        form = RetornoForm(instance=retorno)
+
+    return render(request, 'core/form_retorno.html', {'form': form})
+
+
+def excluir_retorno(request, id):
+    retorno = Retorno.objects.get(id=id)
+
+    if request.method == 'POST':
+        retorno.delete()
+        return redirect('retornos')
+
+    return render(request, 'core/excluir_retorno.html', {'retorno': retorno})

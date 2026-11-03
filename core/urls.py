@@ -21,4 +21,7 @@ urlpatterns = [
     path('dietas/excluir/<int:id>/', views.excluir_dieta, name='excluir_dieta'),
 
     path('retornos/', views.retornos, name='retornos'),
+    path('retornos/cadastrar/', views.cadastrar_retorno, name='cadastrar_retorno'),
+    path('retornos/editar/<int:id>/', views.editar_retorno, name='editar_retorno'),
+    path('retornos/excluir/<int:id>/', views.excluir_retorno, name='excluir_retorno'),
 ]
