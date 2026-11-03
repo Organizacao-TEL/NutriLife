@@ -1,6 +1,54 @@
 {% extends 'core/base.html' %}
 
 {% block conteudo %}
-    <h2>Retornos</h2>
-    <p>Área de acompanhamento dos clientes.</p>
+
+<h2>Retornos e Consultas</h2>
+
+<p>Registre e acompanhe a evolução dos clientes.</p>
+
+<br>
+
+<a href="{% url 'cadastrar_retorno' %}">
+    <button type="button">Cadastrar Retorno</button>
+</a>
+
+<br><br>
+
+<h3>Retornos cadastrados</h3>
+
+{% if retornos %}
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Cliente</th>
+        <th>Data</th>
+        <th>Evolução</th>
+        <th>Ajustes</th>
+        <th>Observações</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for retorno in retornos %}
+    <tr>
+        <td>{{ retorno.cliente.nome }}</td>
+        <td>{{ retorno.data }}</td>
+        <td>{{ retorno.evolucao }}</td>
+        <td>{{ retorno.ajustes }}</td>
+        <td>{{ retorno.observacoes }}</td>
+        <td>
+            <a href="{% url 'editar_retorno' retorno.id %}">Editar</a>
+            |
+            <a href="{% url 'excluir_retorno' retorno.id %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% else %}
+
+<p>Nenhum retorno cadastrado ainda.</p>
+
+{% endif %}
+
 {% endblock %}

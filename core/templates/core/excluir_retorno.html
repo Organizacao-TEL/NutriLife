@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Excluir Retorno</h2>
+
+<p>
+    Tem certeza que deseja excluir o retorno do cliente
+    <strong>{{ retorno.cliente.nome }}</strong>,
+    registrado em {{ retorno.data }}?
+</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <button type="submit">Sim, excluir</button>
+</form>
+
+<a href="{% url 'retornos' %}">Cancelar</a>
+
+{% endblock %}
