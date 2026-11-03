@@ -261,3 +261,19 @@ def historico_cliente(request, id):
         'dietas': dietas,
         'retornos': retornos
     })
+
+@login_required(login_url='login')
+def relatorios(request):
+    total_clientes = Cliente.objects.count()
+    total_avaliacoes = Avaliacao.objects.count()
+    total_dietas = Dieta.objects.count()
+    total_retornos = Retorno.objects.count()
+
+    contexto = {
+        'total_clientes': total_clientes,
+        'total_avaliacoes': total_avaliacoes,
+        'total_dietas': total_dietas,
+        'total_retornos': total_retornos,
+    }
+
+    return render(request, 'core/relatorios.html', contexto)
