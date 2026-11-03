@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Login - NutriLife</h2>
+
+<p>Entre com seu usuário e senha para acessar o sistema.</p>
+
+{% if erro %}
+    <p style="color: red;">{{ erro }}</p>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p>
+        <label>Usuário:</label>
+        <input type="text" name="username" required>
+    </p>
+
+    <p>
+        <label>Senha:</label>
+        <input type="password" name="password" required>
+    </p>
+
+    <button type="submit">Entrar</button>
+</form>
+
+{% endblock %}
