@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block conteudo %}
+
+<h2>Relatórios do NutriLife</h2>
+
+<p>Acompanhe os dados gerais cadastrados no sistema.</p>
+
+<div class="relatorios-container">
+
+    <div class="relatorio-card">
+        <h3>Total de Clientes</h3>
+        <p>{{ total_clientes }}</p>
+    </div>
+
+    <div class="relatorio-card">
+        <h3>Total de Avaliações</h3>
+        <p>{{ total_avaliacoes }}</p>
+    </div>
+
+    <div class="relatorio-card">
+        <h3>Total de Dietas</h3>
+        <p>{{ total_dietas }}</p>
+    </div>
+
+    <div class="relatorio-card">
+        <h3>Total de Retornos</h3>
+        <p>{{ total_retornos }}</p>
+    </div>
+
+</div>
+
+{% endblock %}
